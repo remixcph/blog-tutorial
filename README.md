@@ -1,7 +1,10 @@
 # Remix blog tutorial
 
-- [Tutorial walkthrough](https://remix.run/docs/en/main/tutorials/blog#quickstart)
-- Based on the remix [indie stack](https://github.com/remix-run/indie-stack)
+[Tutorial walkthrough](https://remix.run/docs/en/main/tutorials/blog#quickstart)
+
+The completed tutorial code is in the `tutorial` branch
+
+Based on the remix [indie stack](https://github.com/remix-run/indie-stack)
 
 # Assignments
 
