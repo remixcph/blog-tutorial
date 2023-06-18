@@ -1,6 +1,6 @@
 import type { ActionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, useActionData, useNavigation } from "@remix-run/react";
+import { Form, Link, useActionData, useNavigation } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { createPost } from "~/models/post.server";
 
@@ -40,6 +40,16 @@ export default function NewPost() {
 
   const navigation = useNavigation();
   const isCreating = Boolean(navigation.state === "submitting");
+
+  if (isCreating) {
+    return (
+      <p>
+        <Link to="new" className="text-green-600 underline">
+          Create a New Post
+        </Link>
+      </p>
+    );
+  }
 
   return (
     <Form method="post">
