@@ -1,14 +1,18 @@
+import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 
-import { getPosts } from "~/models/post.server";
+import { getPostsByUserId } from "~/models/post.server";
+import { requireUserId } from "~/session.server";
 
-export const loader = async () => {
-  return json({ posts: await getPosts() });
+export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await requireUserId(request);
+  return json({ posts: await getPostsByUserId(userId) });
 };
 
 export default function PostAdmin() {
   const { posts } = useLoaderData<typeof loader>();
+
   return (
     <div className="mx-auto max-w-4xl">
       <h1 className="my-6 mb-2 border-b-2 text-center text-3xl">Blog Admin</h1>

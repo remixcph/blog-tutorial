@@ -3,10 +3,13 @@ import { json, redirect } from "@remix-run/node";
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { createPost } from "~/models/post.server";
+import { requireUserId } from "~/session.server";
 
 const inputClassName = `w-full rounded border border-gray-500 px-2 py-1 text-lg`;
 
 export const action = async ({ request }: ActionArgs) => {
+  const userId = await requireUserId(request);
+
   const formData = await request.formData();
 
   const title = formData.get("title");
@@ -30,7 +33,7 @@ export const action = async ({ request }: ActionArgs) => {
   invariant(typeof slug === "string", "slug must be a string");
   invariant(typeof markdown === "string", "markdown must be a string");
 
-  await createPost({ title, slug, markdown });
+  await createPost({ title, slug, markdown, userId });
 
   return redirect("/posts/admin");
 };
