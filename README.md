@@ -8,13 +8,23 @@ Based on the remix [indie stack](https://github.com/remix-run/indie-stack)
 
 # Assignments
 
-## Change layout to be nested + add pending states
+## Change layout to be nested
 
-Add short assignemnt description here
+Similar to the `/posts/admin` route, we would like to keep the posts list visible while navigating between the different posts.
+
+In order to do so, we can make a `posts.tsx` layout route (that renders an `<Outlet />`) to nest the other routes. The `posts.index.tsx` page could also be updated to not render the list twice.
+
+🏆 Bonus points for removing the `/posts` layout nesting from the `/posts/admin` routes.
 
 ## Update/delete posts
 
-Add short assignemnt description here
+Make a `posts.admin.$slug.tsx` page for your posts. This should open an edit page for the post that allows you to update the post or even delete it.
+
+The links are already there in the sidebar, but they return 404! Create a new route that reads the posts, and puts them into the fields.
+
+Almost all the code you need is already in `app/routes/posts.$slug.tsx` and `app/routes/posts.admin.new.tsx`. You just gotta put it together 🧩
+
+🏆 Bonus points for having different redirects for update and delete.
 
 ## Replace basic validation with remix-validated-form or zodix
 
@@ -22,7 +32,9 @@ Add short assignemnt description here
 
 ## Optimistic ui
 
-Add short assignemnt description here
+You know how when you favorite a tweet, the heart goes red instantly and if the tweet is deleted it reverts back to empty? That's Optimistic UI: assume the request will succeed, and render what the user will see if it does.
+
+So the assignment is to make it so when you hit "Create" it renders the new post's title in the left nav and the page renders the "Create a New Post" link.
 
 ## Authentication (lock down admin routes)
 
