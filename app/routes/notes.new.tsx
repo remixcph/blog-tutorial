@@ -1,10 +1,25 @@
 import type { ActionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import { useActionData } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
 import { createNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
+
+import { ValidatedForm, useField } from "remix-validated-form";
+import { withZod } from "@remix-validated-form/with-zod";
+import { z } from "zod";
+
+export const validator = withZod(
+  z.object({
+    title: z
+      .string()
+      .min(12, { message: "A minimun of 12 chars is required for title." }),
+    body: z
+      .string()
+      .min(144, { message: "A minimun of 12 chars is required for body." }),
+  })
+);
 
 export const action = async ({ request }: ActionArgs) => {
   const userId = await requireUserId(request);
@@ -46,7 +61,8 @@ export default function NewNotePage() {
   }, [actionData]);
 
   return (
-    <Form
+    <ValidatedForm
+      validator={validator}
       method="post"
       style={{
         display: "flex",
@@ -104,6 +120,6 @@ export default function NewNotePage() {
           Save
         </button>
       </div>
-    </Form>
+    </ValidatedForm>
   );
 }
