@@ -28,7 +28,15 @@ Almost all the code you need is already in `app/routes/posts.$slug.tsx` and `app
 
 ## Replace basic validation with remix-validated-form or zodix
 
-Add short assignemnt description here
+During the tutorial we had to add quite a bit of code to validate the form input data, both for the user facing validation and to make typescript happy.
+In an application with lots of forms this can become tedious. The real-world remix applications that we have seen does not do it manually like this, instead premade tools or libraries are used.
+
+A number of options exist but some good candidates are:
+
+- [Remix Validated Form](https://www.remix-validated-form.io/) Complete client and server-side validation based on zod or yup schemas.
+- [Zodix](https://github.com/rileytomasek/zodix) validates, parses and casts formData, params and query data server-side based on zod schemas. This is a more general, multipurpose lib than Remix Validated Form, but you will have to implement the client side validation yourself.
+
+The assignment is to replace the validation code and the invariants in the `posts.admin.new.tsx` file with Remix Validated Form.
 
 ## Optimistic ui
 
