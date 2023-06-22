@@ -6,6 +6,27 @@ The completed tutorial code is in the `tutorial` branch
 
 Based on the remix [indie stack](https://github.com/remix-run/indie-stack)
 
+# Development
+
+- Initial setup:
+
+  ```sh
+  npm run setup
+  ```
+
+- Start dev server:
+
+  ```sh
+  npm run dev
+  ```
+
+This starts your app in development mode, rebuilding assets on file changes.
+
+The database seed script creates a new user with some data you can use to get started:
+
+- Email: `rachel@remix.run`
+- Password: `racheliscool`
+
 # Assignments
 
 ## Change layout to be nested
@@ -62,24 +83,3 @@ In order to do so there are a few things we must go through:
 - when creating a new `Post` we will have to link it to the `User` that created it; we have to update the `action` of `posts.admin.new.tsx` to do so
   - using the same method as before, we will get the id of the logged in user
   - once we have the id, we must pass it to the function that creates the `Post` (`post.models.ts`)
-
-# Development
-
-- Initial setup:
-
-  ```sh
-  npm run setup
-  ```
-
-- Start dev server:
-
-  ```sh
-  npm run dev
-  ```
-
-This starts your app in development mode, rebuilding assets on file changes.
-
-The database seed script creates a new user with some data you can use to get started:
-
-- Email: `rachel@remix.run`
-- Password: `racheliscool`
