@@ -16,6 +16,7 @@ model User {
 
   password Password?
   notes    Note[]
+  Post     Post[]
 }
 
 model Password {
@@ -44,4 +45,7 @@ model Post {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
 }

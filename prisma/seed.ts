@@ -49,6 +49,7 @@ async function seed() {
   
   Isn't it great?
       `.trim(),
+      userId: user.id,
     },
     {
       slug: "90s-mixtape",
@@ -74,6 +75,7 @@ async function seed() {
   - Santa Monica (Everclear)
   - C'mon N' Ride it (Quad City DJ's)
       `.trim(),
+      userId: user.id,
     },
   ];
 
