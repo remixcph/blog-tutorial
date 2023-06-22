@@ -71,46 +71,8 @@ export default function NewNotePage() {
         width: "100%",
       }}
     >
-      <div>
-        <label className="flex w-full flex-col gap-1">
-          <span>Title: </span>
-          <input
-            ref={titleRef}
-            name="title"
-            className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
-            aria-invalid={actionData?.errors?.title ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.title ? "title-error" : undefined
-            }
-          />
-        </label>
-        {actionData?.errors?.title ? (
-          <div className="pt-1 text-red-700" id="title-error">
-            {actionData.errors.title}
-          </div>
-        ) : null}
-      </div>
-
-      <div>
-        <label className="flex w-full flex-col gap-1">
-          <span>Body: </span>
-          <textarea
-            ref={bodyRef}
-            name="body"
-            rows={8}
-            className="w-full flex-1 rounded-md border-2 border-blue-500 px-3 py-2 text-lg leading-6"
-            aria-invalid={actionData?.errors?.body ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.body ? "body-error" : undefined
-            }
-          />
-        </label>
-        {actionData?.errors?.body ? (
-          <div className="pt-1 text-red-700" id="body-error">
-            {actionData.errors.body}
-          </div>
-        ) : null}
-      </div>
+      <TextInput name="title" label="Title:" />
+      <TextAreaInput name="body" label="Body:" />
 
       <div className="text-right">
         <button
@@ -123,3 +85,37 @@ export default function NewNotePage() {
     </ValidatedForm>
   );
 }
+
+type MyInputProps = {
+  name: string;
+  label: string;
+};
+
+export const TextInput = ({ name, label }: MyInputProps) => {
+  const { error, getInputProps } = useField(name);
+  return (
+    <div className="flex w-full flex-col gap-1">
+      <label htmlFor={name}>{label}</label>
+      <input
+        className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
+        {...getInputProps({ id: name })}
+      />
+      {error && <span className="text-red-500">{error}</span>}
+    </div>
+  );
+};
+
+export const TextAreaInput = ({ name, label }: MyInputProps) => {
+  const { error, getInputProps } = useField(name);
+  return (
+    <div className="flex w-full flex-col gap-1">
+      <label htmlFor={name}>{label}</label>
+      <textarea
+        rows={8}
+        className="w-full flex-1 rounded-md border-2 border-blue-500 px-3 py-2 text-lg leading-6"
+        {...getInputProps({ id: name })}
+      />
+      {error && <span className="text-red-500">{error}</span>}
+    </div>
+  );
+};
